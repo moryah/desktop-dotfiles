@@ -170,7 +170,7 @@ bar {
 exec --no-startup-id i3-msg 'exec tilda'
 #exec --no-startup-id i3-msg 'exec conky -c ~/.conkyrc'
 
-bindsym $mod+q exec qutebrowser
+bindsym $mod+q exec qutebrowser --backend webengine
 bindsym $mod+Mod1+q [class=qutebrowser] focus
 bindsym $mod+y exec conky -c ~/conkyrc
 bindsym Print exec "scrot ~/Screenshot%Y-%m-%d%H:%M:%S.png"

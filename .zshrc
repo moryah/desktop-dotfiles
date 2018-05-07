@@ -124,7 +124,16 @@ setopt    incappendhistory  #Immediately append to the history file, not just wh
 
 alias ll='ls -lah'
 alias v='vim'
+alias s='sudo'
+alias i='gpicview'
+alias p='mplayer'
 alias wf='~/.wifi.sh'
+alias c-='cd -'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
 
 
 
@@ -157,3 +166,29 @@ PS1="
 
 export NVM_DIR="/home/rafael/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+
+setopt completealiases
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+chpwd() { ll }
+
+# antigen bundle zsh-users/zsh-completions
+
+autoload -Uz colors
+colors
+
+# setting for dividing word
+autoload -Uz select-word-style
+select-word-style default
+# # these letters are treated as dividing letters
+zstyle ':zle:*' word-chars " /=;@:{}, |"
+zstyle ':zle:*' word-style unspecified
+
+zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
+zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
