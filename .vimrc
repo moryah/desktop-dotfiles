@@ -2,8 +2,9 @@ noremap ww :w<CR>
 noremap <C-P> @:<CR>
 map <leader>d <Plug>(ale_fix)
 map <leader>f :file<CR>
-
 noremap <leader>o <C-W>gf
+noremap gb :tabprevious<CR>
+nnoremap gw <C-w><C-w> <CR>
 
 "set nocompatible
 syntax on
@@ -128,3 +129,15 @@ let &t_EI = "\e[5 q"
 "        au InsertEnter * highlight StatusLine cterm=bold ctermfg=black ctermbg=green
 "      endif
 
+" find files and populate the quickfix list
+fun! FindFiles(filename)
+  let error_file = tempname()
+  silent exe '!find . -iname "'.a:filename.'*" | xargs file | sed "s/:/:1:/" > '.error_file
+  set errorformat=%f:%l:%m
+  exe "cfile ". error_file
+  copen
+  call delete(error_file)
+endfun
+command! -nargs=1 FindFile call FindFiles(<q-args>)
+
+set switchbuf+=newtab

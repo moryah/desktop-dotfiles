@@ -110,7 +110,7 @@ autoload -Uz run-help
 ##############################################################################
 HISTSIZE=5000               #How many lines of history to keep in memory
 HISTFILE=~/.zsh_history     #Where to save history to disk
-SAVEHIST=5000               #Number of history entries to save to disk
+SAVEHIST=50000               #Number of history entries to save to disk
 #HISTDUP=erase               #Erase duplicates in the history file
 setopt    appendhistory     #Append history to the history file (no overwriting)
 setopt    sharehistory      #Share history across terminals
@@ -128,6 +128,8 @@ alias s='sudo'
 alias i='gpicview'
 alias p='mplayer'
 alias wf='~/.wifi.sh'
+alias dh='df -h'
+alias bye='s shutdown -h now'
 alias c-='cd -'
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -178,8 +180,6 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 chpwd() { ll }
 
-# antigen bundle zsh-users/zsh-completions
-
 autoload -Uz colors
 colors
 
@@ -192,3 +192,25 @@ zstyle ':zle:*' word-style unspecified
 
 zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
+
+
+source /usr/share/zsh-antigen/antigen.zsh
+
+antigen use oh-my-zsh
+
+antigen bundle zsh-users/zsh-completions
+
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle heroku
+antigen bundle pip
+antigen bundle lein
+antigen bundle command-not-found
+# Load the theme.
+antigen theme robbyrussell
+
+# Tell Antigen that you're done.
+antigen apply
