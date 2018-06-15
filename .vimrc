@@ -1,10 +1,17 @@
 noremap ww :w<CR>
 noremap <C-P> @:<CR>
 map <leader>d <Plug>(ale_fix)
-map <leader>f :file<CR>
+map <leader>p :file<CR>
+"map <leader>f :FindFile <CR>
+nnoremap <buffer> <leader>f :call FindFiles(input('Param: '))<CR>
 noremap <leader>o <C-W>gf
+"noremap <leader><C-o> <C-W>gf
 noremap gb :tabprevious<CR>
 nnoremap gw <C-w><C-w> <CR>
+map <leader>] :tab split <CR>:exec("tag ".expand("<cword>"))<CR>
+map <leader>[ :vsp<CR><C-w><C-w> :exec("tag ".expand("<cword>"))<CR>zt
+map <leader>l :set cursorcolumn<CR>
+map <leader>k :set cursorcolumn&<CR>
 
 "set nocompatible
 syntax on
@@ -21,6 +28,26 @@ set ruler
 "highlight StatusLine ctermbg=230
 "highlight StatusLineTerm ctermbg=230
 
+
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+"autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
+"Alternatively you can add the following lines to your colorscheme file.
+hi IndentGuidesOdd  ctermbg=233
+hi IndentGuidesEven ctermbg=233
+
+"https://github.com/Yggdroot/indentLine
+let g:indentLine_char = '|'
+let g:indentLine_color_term = 235
+let g:indentLine_concealcursor = 0
+"let g:indentLine_setColors = 0
+"let g:indentLine_bgcolor_term = NONE
+"let g:indentLine_setConceal = 0
+"let g:indentLine_enabled = 0
+"let g:indentLine_concealcursor = 'inc'
+
 highlight SpellBad ctermbg=red ctermbg=NONE
 
 highlight Normal ctermbg=232
@@ -36,6 +63,7 @@ highlight LineNr ctermfg=Black ctermbg=16
 highlight CursorLineNr cterm=NONE ctermbg=234 ctermfg=darkgray guibg=NONE guifg=NONE
 
 highlight CursorLine cterm=NONE ctermbg=234
+highlight CursorColumn cterm=NONE ctermbg=234
 
 highlight Visual cterm=NONE ctermbg=52
 "ctermfg=NONE guibg=NONE guifg=NONEZZ
@@ -117,7 +145,6 @@ let &t_SI = "\e[3 q"
 let &t_EI = "\e[5 q"
 
 
-
 " Statusline
 "set noshowmode 
 "set statusline=%t\ %m%r%y%=(ascii=\%03.3b,hex=\%02.2B)\ (%l/%L,%c)\ (%P)
@@ -132,7 +159,7 @@ let &t_EI = "\e[5 q"
 " find files and populate the quickfix list
 fun! FindFiles(filename)
   let error_file = tempname()
-  silent exe '!find . -iname "'.a:filename.'*" | xargs file | sed "s/:/:1:/" > '.error_file
+  silent exe '!find . -iname "*'.a:filename.'*" | xargs file | sed "s/:/:1:/" > '.error_file
   set errorformat=%f:%l:%m
   exe "cfile ". error_file
   copen

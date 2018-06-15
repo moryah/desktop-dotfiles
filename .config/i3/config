@@ -178,6 +178,7 @@ bindsym F3 [class=Geany] focus
 bindsym $mod+Mod1+e [class=Eclipse] focus
 bindsym F4 [class=Eclipse] focus
 bindsym $mod+y exec conky -c ~/conkyrc
+bindsym F12 workspace 9
 bindsym Print exec "scrot ~/Screenshot%Y-%m-%d%H:%M:%S.png"
 bindsym $mod+Print exec "gnome-screenshot -a"
 # --file=~/Screenshot_area%Y-%m-%d%H:%M:%S.png"
